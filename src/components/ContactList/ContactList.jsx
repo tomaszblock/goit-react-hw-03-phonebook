@@ -4,11 +4,11 @@ export const ContactList = ({ contacts }) => {
   return (
     <div>
       <h2>Contacts</h2>
-      <div>
+      <ul>
         {contacts.map((contact) => (
-          <p key={contact.id}>{contact.name}</p>
+          <li key={contact.id}>{contact.name}</li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
