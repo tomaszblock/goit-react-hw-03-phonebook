@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    const storedContacts = localStorage.getItem('contacts');
+    return storedContacts ? JSON.parse(storedContacts) : [];
+  });
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const handleNameChange = e => {
     setName(e.target.value);
